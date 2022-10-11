@@ -1,0 +1,8 @@
+StringConcat:testStringManyConcat10() (gas: 6153)
+StringConcat:testStringManyConcat20() (gas: 9004)
+StringConcat:testStringManyConcat40() (gas: 15382)
+StringConcat:testStringManyConcat80() (gas: 31138)
+StringConcat:testStringSingleConcatLength10() (gas: 3483)
+StringConcat:testStringSingleConcatLength20() (gas: 4306)
+StringConcat:testStringSingleConcatLength40() (gas: 5401)
+StringConcat:testStringSingleConcatLength80() (gas: 7331)
