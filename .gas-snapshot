@@ -1,3 +1,6 @@
+ConstructorArgsTest:testParentGetterConstructorArgs() (gas: 286954)
+ConstructorArgsTest:testRegularConstructorArgs() (gas: 249794)
+ConstructorArgsTest:testStructConstructorArgs() (gas: 250432)
 StringConcat:testStringManyConcat10() (gas: 6153)
 StringConcat:testStringManyConcat20() (gas: 9004)
 StringConcat:testStringManyConcat40() (gas: 15382)
