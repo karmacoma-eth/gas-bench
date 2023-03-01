@@ -49,25 +49,20 @@ contract CompactAddressArrayUnpacker {
 }
 
 contract AddressArray is Test {
-    address[] normal_addresses_1;
-    bytes compact_addresses_1;
-
-    address[] normal_addresses_2;
-    bytes compact_addresses_2;
-
-    address[] normal_addresses_4;
-    bytes compact_addresses_4;
-
-    address[] normal_addresses_8;
-    bytes compact_addresses_8;
-
+    address[] normal_addresses_01;
+    address[] normal_addresses_02;
+    address[] normal_addresses_04;
+    address[] normal_addresses_08;
     address[] normal_addresses_16;
-    bytes compact_addresses_16;
-
     address[] normal_addresses_32;
-    bytes compact_addresses_32;
-
     address[] normal_addresses_64;
+
+    bytes compact_addresses_01;
+    bytes compact_addresses_02;
+    bytes compact_addresses_04;
+    bytes compact_addresses_08;
+    bytes compact_addresses_16;
+    bytes compact_addresses_32;
     bytes compact_addresses_64;
 
     NormalAddressArrayUnpacker normal = new NormalAddressArrayUnpacker();
@@ -77,20 +72,20 @@ contract AddressArray is Test {
     OneAddressAtATime one = new OneAddressAtATime();
 
     function setUp() public {
-        normal_addresses_1.push(makeAddr("1"));
-        compact_addresses_1 = abi.encodePacked(makeAddr("1"));
+        normal_addresses_01.push(makeAddr("1"));
+        compact_addresses_01 = abi.encodePacked(makeAddr("1"));
 
-        normal_addresses_2.push(makeAddr("1"));
-        normal_addresses_2.push(makeAddr("2"));
+        normal_addresses_02.push(makeAddr("1"));
+        normal_addresses_02.push(makeAddr("2"));
 
-        compact_addresses_2 = abi.encodePacked(makeAddr("1"), makeAddr("2"));
+        compact_addresses_02 = abi.encodePacked(makeAddr("1"), makeAddr("2"));
 
-        normal_addresses_4.push(makeAddr("1"));
-        normal_addresses_4.push(makeAddr("2"));
-        normal_addresses_4.push(makeAddr("3"));
-        normal_addresses_4.push(makeAddr("4"));
+        normal_addresses_04.push(makeAddr("1"));
+        normal_addresses_04.push(makeAddr("2"));
+        normal_addresses_04.push(makeAddr("3"));
+        normal_addresses_04.push(makeAddr("4"));
 
-        compact_addresses_4 = abi.encodePacked(
+        compact_addresses_04 = abi.encodePacked(
             makeAddr("1"),
             makeAddr("2"),
             makeAddr("3"),
@@ -101,9 +96,9 @@ contract AddressArray is Test {
             address addr_i = makeAddr(string(abi.encodePacked("addr", i)));
 
             if (i < 8) {
-                normal_addresses_8.push(addr_i);
-                compact_addresses_8 = abi.encodePacked(
-                    compact_addresses_8,
+                normal_addresses_08.push(addr_i);
+                compact_addresses_08 = abi.encodePacked(
+                    compact_addresses_08,
                     addr_i
                 );
             }
@@ -133,35 +128,35 @@ contract AddressArray is Test {
     }
 
     function testNormal_01() public view {
-        normal.foo(normal_addresses_1);
+        normal.foo(normal_addresses_01);
     }
 
     function testCompact_01() public view {
-        compact.foo(compact_addresses_1);
+        compact.foo(compact_addresses_01);
     }
 
     function testNormal_02() public view {
-        normal.foo(normal_addresses_2);
+        normal.foo(normal_addresses_02);
     }
 
     function testCompact_02() public view {
-        compact.foo(compact_addresses_2);
+        compact.foo(compact_addresses_02);
     }
 
     function testNormal_04() public view {
-        normal.foo(normal_addresses_4);
+        normal.foo(normal_addresses_04);
     }
 
     function testCompact_04() public view {
-        compact.foo(compact_addresses_4);
+        compact.foo(compact_addresses_04);
     }
 
     function testNormal_08() public view {
-        normal.foo(normal_addresses_8);
+        normal.foo(normal_addresses_08);
     }
 
     function testCompact_08() public view {
-        compact.foo(compact_addresses_8);
+        compact.foo(compact_addresses_08);
     }
 
     function testNormal_16() public view {
@@ -189,24 +184,24 @@ contract AddressArray is Test {
     }
 
     function testNotBatched_01() public view {
-        one.foo(normal_addresses_1[0]);
+        one.foo(normal_addresses_01[0]);
     }
 
     function testNotBatched_02() public view {
-        one.foo(normal_addresses_2[0]);
-        one.foo(normal_addresses_2[1]);
+        one.foo(normal_addresses_02[0]);
+        one.foo(normal_addresses_02[1]);
     }
 
     function testNotBatched_04() public view {
-        one.foo(normal_addresses_4[0]);
-        one.foo(normal_addresses_4[1]);
-        one.foo(normal_addresses_4[2]);
-        one.foo(normal_addresses_4[3]);
+        one.foo(normal_addresses_04[0]);
+        one.foo(normal_addresses_04[1]);
+        one.foo(normal_addresses_04[2]);
+        one.foo(normal_addresses_04[3]);
     }
 
     function testNotBatched_08() public view {
         for (uint256 i = 0; i < 8; ) {
-            one.foo(normal_addresses_8[i]);
+            one.foo(normal_addresses_08[i]);
 
             unchecked {
                 i++;
