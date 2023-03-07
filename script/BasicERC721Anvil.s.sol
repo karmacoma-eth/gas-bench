@@ -8,6 +8,8 @@ import {BasicERC721} from "src/BasicERC721.sol";
 contract BasicERC721Script is Script {
     string internal constant ANVIL_MNEMONIC = "test test test test test test test test test test test junk";
 
+    // can deploy with
+    //   forge script script/BasicERC721Anvil.s.sol --rpc-url anvil --broadcast
     function run() public {
         string memory mnemonic = vm.envOr("MNEMONIC", ANVIL_MNEMONIC);
         uint256 deployerPK = vm.deriveKey(mnemonic, uint32(0));
